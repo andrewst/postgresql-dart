@@ -12,6 +12,7 @@ class MessageFrame {
     68: () => new DataRowMessage(),
     69: () => new ErrorResponseMessage(),
     75: () => new BackendKeyMessage(),
+    78: () => new NoticeResponseMessage(),
     82: () => new AuthenticationMessage(),
     83: () => new ParameterStatusMessage(),
     84: () => new RowDescriptionMessage(),

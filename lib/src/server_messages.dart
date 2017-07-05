@@ -7,8 +7,8 @@ abstract class ServerMessage {
   void readBytes(Uint8List bytes);
 }
 
-class ErrorResponseMessage implements ServerMessage {
-  List<ErrorField> fields = [new ErrorField()];
+class NoticeResponseMessage implements ServerMessage {
+  List<NoticeOrErrorField> fields = [new NoticeOrErrorField()];
 
   void readBytes(Uint8List bytes) {
     var lastByteRemovedList =
@@ -20,9 +20,13 @@ class ErrorResponseMessage implements ServerMessage {
         return;
       }
 
-      fields.add(new ErrorField());
+      fields.add(new NoticeOrErrorField());
     });
   }
+}
+
+class ErrorResponseMessage extends NoticeResponseMessage {
+
 }
 
 class AuthenticationMessage implements ServerMessage {
@@ -228,7 +232,7 @@ class UnknownMessage extends ServerMessage {
   }
 }
 
-class ErrorField {
+class NoticeOrErrorField {
   static const int SeverityIdentifier = 83;
   static const int CodeIdentifier = 67;
   static const int MessageIdentifier = 77;
